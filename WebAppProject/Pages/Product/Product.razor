@@ -2,11 +2,22 @@
 
 @using WebAppProject.Data
 @using WebAppProject.Data.Models
+@using WebAppProject.ViewModels.Product
 
 @inject IProductDataService db
 
 <h1>Product Page</h1>
 
+<h4>Insert new Product</h4>
+<EditForm Model="@newProduct" OnValidSubmit="@InsertProduct">
+  <DataAnnotationsValidator/>
+  <ValidationSummary/>
+
+  <InputText id="name" @bind-Value="newProduct.Name"/>
+  <InputNumber id="price" @bind-Value="newProduct.Price"/>
+
+  <button type="submit" class="btn btn-primary">Add New Product </button>
+</EditForm>
 <h4>Current Products</h4>
 
 @if(products is null)
@@ -39,9 +50,26 @@ else
 
 @code {
     private List<ProductModel> products;
+    private ProductDisplayModel newProduct = new ProductDisplayModel(); 
 
     protected override async Task OnInitializedAsync()
     {
         products = await this.db.GetProducts();
+    }
+
+    private async Task InsertProduct()
+    {
+        ProductModel product = new ProductModel
+            {
+                Name = newProduct.Name,
+                Price = newProduct.Price,
+                DateAdded = DateTime.UtcNow
+            };
+        await this.db.InsertProduct(product);
+
+        products.Add(product);
+       // products = await this.db.GetProducts(); 
+        newProduct = new ProductDisplayModel();
+
     }
 }

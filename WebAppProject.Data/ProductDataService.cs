@@ -23,7 +23,7 @@ namespace WebAppProject.Data
             return this.db.LoadData<ProductModel, dynamic>(sql, new { });
         }
 
-        public Task InsertPerson(ProductModel product)
+        public Task InsertProduct(ProductModel product)
         {
             string sql = @"insert into dbo.Product (Name,Price,DataAdded)
                              values (@Name,@Price,@DataAdded);";
