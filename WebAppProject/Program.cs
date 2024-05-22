@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using WebAppProject.Infrastucture.Extensions;
 
 namespace WebAppProject
 {
@@ -12,9 +13,10 @@ namespace WebAppProject
             // Add services to the container.
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
-           
 
-            var app = builder.Build();
+            builder.Services.AddApplicationServises();
+
+            WebApplication app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
