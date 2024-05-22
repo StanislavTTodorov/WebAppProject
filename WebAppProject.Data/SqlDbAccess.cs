@@ -6,7 +6,7 @@ using System.Data;
 
 namespace WebAppProject.Data
 {
-    public class SqlDbAccess
+    public class SqlDbAccess : ISqlDbAccess
     {
         private readonly IConfiguration config;
 
@@ -29,6 +29,15 @@ namespace WebAppProject.Data
             }
         }
 
-        
+        public async Task SaveData<T>(string sql, T parameters)
+        {
+            string connectionString = this.config.GetConnectionString(ConnnectionStringName);
+
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                await connection.ExecuteAsync(sql, parameters);
+
+            }
+        }
     }
 }
