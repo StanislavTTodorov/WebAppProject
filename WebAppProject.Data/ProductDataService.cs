@@ -25,8 +25,9 @@ namespace WebAppProject.Data
 
         public Task InsertProduct(ProductModel product)
         {
-            string sql = @"insert into dbo.Product (Name,Price,DataAdded)
-                             values (@Name,@Price,@DataAdded);";
+
+            string sql = @"INSERT INTO [Products]([Id],[Name],[Price],[DateAdded])
+                              VALUES (@Id,@Name,@Price,@DateAdded)";
 
             return this.db.SaveData(sql, product);
 

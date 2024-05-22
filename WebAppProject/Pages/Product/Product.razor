@@ -14,7 +14,7 @@
   <ValidationSummary/>
 
   <InputText id="name" @bind-Value="newProduct.Name"/>
-  <InputNumber id="price" @bind-Value="newProduct.Price"/>
+    <InputNumber id="price" @bind-Value="newProduct.Price" TValue="decimal" Step="0.5" type="number" />
 
   <button type="submit" class="btn btn-primary">Add New Product </button>
 </EditForm>
@@ -61,14 +61,16 @@ else
     {
         ProductModel product = new ProductModel
             {
+                Id = Guid.NewGuid(),
                 Name = newProduct.Name,
                 Price = newProduct.Price,
                 DateAdded = DateTime.UtcNow
             };
         await this.db.InsertProduct(product);
 
-        products.Add(product);
-       // products = await this.db.GetProducts(); 
+        //products.Add(product);
+       products = await this.db.GetProducts(); 
+
         newProduct = new ProductDisplayModel();
 
     }
