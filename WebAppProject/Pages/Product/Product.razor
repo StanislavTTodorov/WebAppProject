@@ -1,0 +1,46 @@
+﻿@page "/Data/Product"
+
+@using WebAppProject.Data
+@using WebAppProject.Data.Models
+
+@inject IProductDataService db
+
+<h1>Product Page</h1>
+
+<h4>Current Products</h4>
+
+@if(products is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Date Added</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in products)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>@product.Price</td>
+                    <td>@product.DateAdded</td>                   
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<ProductModel> products;
+
+    protected override async Task OnInitializedAsync()
+    {
+        products = await this.db.GetProducts();
+    }
+}
