@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WebAppProject.Common\WebAppProject.Common.csproj" />
     <ProjectReference Include="..\WebAppProject.Data\WebAppProject.Data.csproj" />
     <ProjectReference Include="..\WebAppProject.Infrastucture\WebAppProject.Infrastucture.csproj" />
   </ItemGroup>
