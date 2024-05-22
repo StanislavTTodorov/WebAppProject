@@ -6,13 +6,13 @@ using System.Data;
 
 namespace WebAppProject.Data
 {
-    public class SqlDbAccess : ISqlDbAccess
+    public class SqlDbAccessService : ISqlDbAccessService
     {
         private readonly IConfiguration config;
 
         public string ConnnectionStringName { get; set; } = "DefaultConnection";
 
-        public SqlDbAccess(IConfiguration config)
+        public SqlDbAccessService(IConfiguration config)
         {
             this.config = config;
         }

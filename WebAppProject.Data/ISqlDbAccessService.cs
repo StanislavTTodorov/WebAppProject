@@ -1,7 +1,7 @@
 ﻿
 namespace WebAppProject.Data
 {
-    public interface ISqlDbAccess
+    public interface ISqlDbAccessService
     {
         string ConnnectionStringName { get; set; }
 

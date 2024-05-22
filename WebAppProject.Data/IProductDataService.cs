@@ -2,7 +2,7 @@
 
 namespace WebAppProject.Data
 {
-    public interface IProductData
+    public interface IProductDataService
     {
         Task<List<ProductModel>> GetProducts();
         Task InsertPerson(ProductModel product);

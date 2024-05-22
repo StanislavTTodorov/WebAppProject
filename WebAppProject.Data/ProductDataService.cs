@@ -7,11 +7,11 @@ using WebAppProject.Data.Models;
 
 namespace WebAppProject.Data
 {
-    public class ProductData : IProductData
+    public class ProductDataService : IProductDataService
     {
-        private readonly ISqlDbAccess db;
+        private readonly ISqlDbAccessService db;
 
-        public ProductData(ISqlDbAccess db)
+        public ProductDataService(ISqlDbAccessService db)
         {
             this.db = db;
         }

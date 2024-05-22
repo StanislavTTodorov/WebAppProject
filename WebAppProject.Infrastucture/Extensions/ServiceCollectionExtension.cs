@@ -11,7 +11,7 @@ namespace WebAppProject.Infrastucture.Extensions
         public static IServiceCollection AddApplicationServises(this IServiceCollection services)
         {
 
-            services.AddServices(typeof(ISqlDbAccess));
+            services.AddServices(typeof(ISqlDbAccessService));
 
             return services;
         }
