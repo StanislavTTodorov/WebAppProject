@@ -10,7 +10,7 @@ namespace WebAppProject.Data
     {
         private readonly IConfiguration config;
 
-        public string ConnnectionStringName { get; set; } = "Default";
+        public string ConnnectionStringName { get; set; } = "DefaultConnection";
 
         public SqlDbAccess(IConfiguration config)
         {
