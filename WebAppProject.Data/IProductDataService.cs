@@ -6,5 +6,7 @@ namespace WebAppProject.Data
     {
         Task<List<ProductModel>> GetProducts();
         Task InsertProduct(ProductModel product);
+        Task UpdateProduct(ProductModel product);
+        Task DeleteProduct(ProductModel product);
     }
 }

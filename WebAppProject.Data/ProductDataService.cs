@@ -16,9 +16,17 @@ namespace WebAppProject.Data
             this.db = db;
         }
 
+        public Task DeleteProduct(ProductModel product)
+        {
+            string sql = @"DELETE FROM [Products]
+		                    WHERE Id = @Id";
+
+            return this.db.SaveData(sql, product);
+        }
+
         public Task<List<ProductModel>> GetProducts()
         {
-            string sql = "select * from dbo.Products";
+            string sql = "SELECT * FROM [Products]";
 
             return this.db.LoadData<ProductModel, dynamic>(sql, new { });
         }
@@ -31,6 +39,17 @@ namespace WebAppProject.Data
 
             return this.db.SaveData(sql, product);
 
+        }
+
+        public Task UpdateProduct(ProductModel product)
+        {
+            string sql = @"UPDATE Products
+	                          SET  [Name] = @Name
+                                  ,[Price] = @Price
+                                  ,[DateAdded] = @DateAdded
+		                    WHERE Id = @Id";
+
+            return this.db.SaveData(sql, product);
         }
     }
 }
