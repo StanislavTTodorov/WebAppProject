@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34616.47
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAppProject", "WebAppProject\WebAppProject.csproj", "{E362C6B9-D063-4AFE-A10F-75A89D362498}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAppProject.Data", "WebAppProject.Data\WebAppProject.Data.csproj", "{B53AD706-4E82-419B-AC65-D8949E330245}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAppProject.Infrastucture", "WebAppProject.Infrastucture\WebAppProject.Infrastucture.csproj", "{FF2E2EB5-0C04-447D-9091-F214F4F870CD}"
@@ -21,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E362C6B9-D063-4AFE-A10F-75A89D362498}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E362C6B9-D063-4AFE-A10F-75A89D362498}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E362C6B9-D063-4AFE-A10F-75A89D362498}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E362C6B9-D063-4AFE-A10F-75A89D362498}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B53AD706-4E82-419B-AC65-D8949E330245}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B53AD706-4E82-419B-AC65-D8949E330245}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B53AD706-4E82-419B-AC65-D8949E330245}.Release|Any CPU.ActiveCfg = Release|Any CPU

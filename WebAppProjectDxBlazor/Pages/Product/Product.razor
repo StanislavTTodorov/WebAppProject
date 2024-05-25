@@ -8,45 +8,7 @@
 
 <h1>Product Page</h1>
 
-<h4>Insert new Product</h4>
-<EditForm Model="@newProduct" OnValidSubmit="@InsertProduct">
-  <DataAnnotationsValidator/>
-  <ValidationSummary/>
-
-  <InputText id="name" @bind-Value="newProduct.Name"/>
-    <InputNumber id="price" @bind-Value="newProduct.Price" TValue="decimal" Step="0.1" type="number" />
-
-  <button type="submit" class="btn btn-primary">Add New Product </button>
-</EditForm>
 <h4>Current Products</h4>
-
-@if(products is null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    //Just to see if the products shows up
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Date Added</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var product in products)
-            {
-                <tr>
-                    <td>@product.Name</td>
-                    <td>@product.Price</td>
-                    <td>@product.DateAdded</td>                   
-                </tr>
-            }
-        </tbody>
-    </table>
-}
 
 @if (products is null)
 {
@@ -54,36 +16,63 @@ else
 }
 else
 {
-      <DxGrid Data="products">
+    <DxGrid Data="products"
+            EditMode="GridEditMode.EditRow"
+            EditModelSaving="OnEditModelSaving"
+            DataItemDeleting="OnDataItemDeleting"
+            ShowGroupPanel="true"
+            ShowFilterRow="true">
+        <Columns>
+            <DxGridCommandColumn Width="200px" />
+            <DxGridDataColumn FieldName="Name" />
+            <DxGridDataColumn FieldName="Price"
+                              Caption="Price"/>
+            <DxGridDataColumn FieldName="DateAdded"
+                              DisplayFormat="D" />
 
-      </DxGrid>      
-    
+        </Columns>
+        <TotalSummary>
+            <DxGridSummaryItem FooterColumnName="Name"
+                               SummaryType="GridSummaryItemType.Count" />
+        </TotalSummary>
+    </DxGrid>
+
 }
 
 @code {
     private List<ProductModel> products;
-    private ProductDisplayModel newProduct = new ProductDisplayModel(); 
+    private ProductDisplayModel newProduct = new ProductDisplayModel();
 
     protected override async Task OnInitializedAsync()
     {
         products = await this.db.GetProducts();
     }
-
-    private async Task InsertProduct()
+   
+    private async void OnDataItemDeleting(GridDataItemDeletingEventArgs e)
     {
-        ProductModel product = new ProductModel
-            {
-                Id = Guid.NewGuid(),
-                Name = newProduct.Name,
-                Price = newProduct.Price,
-                DateAdded = DateTime.UtcNow
-            };
-        await this.db.InsertProduct(product);
+        products.Remove(e.DataItem as ProductModel);
+        await this.db.DeleteProduct(e.DataItem as ProductModel);
+    }
 
-        //products.Add(product);
-       products = await this.db.GetProducts(); 
+    private async void OnEditModelSaving(GridEditModelSavingEventArgs e)
+    {
+        ProductModel editModel = (ProductModel)e.EditModel;
+        ProductModel newProduct = e.IsNew ? new ProductModel() : (ProductModel)e.DataItem;
 
-        newProduct = new ProductDisplayModel();
+        newProduct.Name = editModel.Name;
+        newProduct.Price = editModel.Price;
+        newProduct.DateAdded = editModel.DateAdded;
 
+        if (e.IsNew)
+        {
+            newProduct.Id = Guid.NewGuid();
+            products.Add(newProduct as ProductModel);
+            await this.db.InsertProduct(newProduct);
+        }
+        else
+        {
+            //products.Add(newProduct as ProductModel);
+            await this.db.UpdateProduct(newProduct);
+        }
     }
 }

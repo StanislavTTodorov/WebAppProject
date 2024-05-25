@@ -1,6 +1,4 @@
-using WebAppProjectDxBlazor.Data;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
+
 using WebAppProject.Infrastucture.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +10,6 @@ builder.Services.AddDevExpressBlazor(options => {
     options.BootstrapVersion = DevExpress.Blazor.BootstrapVersion.v5;
     options.SizeMode = DevExpress.Blazor.SizeMode.Medium;
 });
-builder.Services.AddSingleton<WeatherForecastService>();
 builder.WebHost.UseWebRoot("wwwroot");
 builder.WebHost.UseStaticWebAssets();
 builder.Services.AddApplicationServises();
