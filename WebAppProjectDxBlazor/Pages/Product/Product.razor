@@ -16,17 +16,20 @@
 }
 else
 {
-    <DxGrid Data="products"
-            EditMode="GridEditMode.EditRow"
+    <DxGrid Data="products"  
+            ShowSearchBox="true"
             EditModelSaving="OnEditModelSaving"
             DataItemDeleting="OnDataItemDeleting"
+            CustomizeEditModel="OnCustomizeEditModel"
+            KeyFieldName="Id"
             ShowGroupPanel="true"
-            ShowFilterRow="true">
+            ShowFilterRow="true"> 
         <Columns>
-            <DxGridCommandColumn Width="200px" />
+            <DxGridCommandColumn />
             <DxGridDataColumn FieldName="Name" />
             <DxGridDataColumn FieldName="Price"
-                              Caption="Price"/>
+                              DisplayFormat="c"
+                              Caption="Price"/> 
             <DxGridDataColumn FieldName="DateAdded"
                               DisplayFormat="D" />
 
@@ -35,6 +38,24 @@ else
             <DxGridSummaryItem FooterColumnName="Name"
                                SummaryType="GridSummaryItemType.Count" />
         </TotalSummary>
+       <EditFormTemplate Context="editFormContext">        
+            <DxFormLayout>
+                <DxFormLayoutItem Caption="Name">
+                    @editFormContext.GetEditor("Name")
+               </DxFormLayoutItem>
+                <DxFormLayoutItem Caption="Price">
+                    @editFormContext.GetEditor("Price")
+               </DxFormLayoutItem>
+                <DxFormLayoutItem Caption="DateAdded">
+                    @editFormContext.GetEditor("DateAdded")
+               </DxFormLayoutItem>
+                <DxFormLayoutItem ColSpanMd="12">
+                    <ValidationSummary/>
+
+                </DxFormLayoutItem>
+            </DxFormLayout>
+       </EditFormTemplate> 
+       
     </DxGrid>
 
 }
@@ -47,7 +68,7 @@ else
     {
         products = await this.db.GetProducts();
     }
-   
+
     private async void OnDataItemDeleting(GridDataItemDeletingEventArgs e)
     {
         products.Remove(e.DataItem as ProductModel);
@@ -59,20 +80,32 @@ else
         ProductModel editModel = (ProductModel)e.EditModel;
         ProductModel newProduct = e.IsNew ? new ProductModel() : (ProductModel)e.DataItem;
 
+        bool isNotEqual = !(newProduct.Name.Equals(editModel.Name) &&
+                        newProduct.Price.Equals(editModel.Price) &&
+                        newProduct.DateAdded.Equals(editModel.DateAdded));
+
         newProduct.Name = editModel.Name;
         newProduct.Price = editModel.Price;
         newProduct.DateAdded = editModel.DateAdded;
 
+       
         if (e.IsNew)
         {
             newProduct.Id = Guid.NewGuid();
             products.Add(newProduct as ProductModel);
             await this.db.InsertProduct(newProduct);
-        }
-        else
+        }       
+        else if(isNotEqual) 
         {
-            //products.Add(newProduct as ProductModel);
             await this.db.UpdateProduct(newProduct);
+        }
+    }
+    void OnCustomizeEditModel(GridCustomizeEditModelEventArgs e)
+    {
+        if (e.IsNew)
+        {
+            var editModel = (ProductModel)e.EditModel;
+            editModel.DateAdded = DateTime.UtcNow;
         }
     }
 }

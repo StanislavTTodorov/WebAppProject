@@ -1,6 +1,4 @@
-﻿
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using WebAppProject.Data;
 
@@ -10,18 +8,11 @@ namespace WebAppProject.Infrastucture.Extensions
     {
         public static IServiceCollection AddApplicationServises(this IServiceCollection services)
         {
-
             services.AddServices(typeof(ISqlDbAccessService));
 
             return services;
         }
 
-        public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, IConfiguration config)
-        {
-
-            return services;
-
-        }
         public static void AddServices(this IServiceCollection services, Type serviceType)
         {
             Assembly? serviceAssembly = Assembly.GetAssembly(serviceType);
