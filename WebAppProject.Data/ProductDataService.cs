@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WebAppProject.Data.Models;
+﻿using WebAppProject.Data.Models;
 
 namespace WebAppProject.Data
 {
@@ -34,8 +29,10 @@ namespace WebAppProject.Data
         public Task InsertProduct(ProductModel product)
         {
 
-            string sql = @"INSERT INTO [Products]([Id],[Name],[Price],[DateAdded])
-                              VALUES (@Id,@Name,@Price,@DateAdded)";
+            string sql = @"INSERT INTO  [Products]([Id]
+                                       ,[Name],[Price]
+                                       ,[DateAdded])
+                                VALUES (@Id,@Name,@Price,@DateAdded)";
 
             return this.db.SaveData(sql, product);
 

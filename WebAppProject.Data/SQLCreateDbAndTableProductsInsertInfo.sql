@@ -1,0 +1,28 @@
+USE master
+GO
+
+CREATE DATABASE WepAppProject;
+GO
+
+USE WepAppProject
+GO
+
+CREATE TABLE [Products]
+(
+	[Id] uniqueidentifier PRIMARY KEY,
+	[Name] VARCHAR(50) NOT NULL,
+	[Price] DECIMAL(8,2) NOT NULL,
+	[DateAdded] DATETIME2 NOT NULL
+)
+GO
+
+INSERT INTO [Products]([Id],[Name],[Price],[DateAdded])
+     VALUES
+	 ('78494cb1-742b-458f-b77b-e546128c3dde','Chair',220.50,'03/07/2020'),
+	 ('D38129CD-4FD2-4E18-8F7A-5DE5809117A6','Watch',500.70,'06/25/2024'),
+	 ('46541902-F272-4262-9A57-EE3E97378298','Table',1000.99,'03/20/2023'),
+	 ('43391BFF-A7CC-4BD2-BD52-26622B9D36B9','Box',50,'06/25/2021')
+
+
+
+	 

@@ -36,7 +36,6 @@ namespace WebAppProject.Data
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 await connection.ExecuteAsync(sql, parameters);
-
             }
         }
     }
