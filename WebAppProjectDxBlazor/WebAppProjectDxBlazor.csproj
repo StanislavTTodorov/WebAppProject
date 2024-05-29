@@ -16,5 +16,6 @@
     <ProjectReference Include="..\WebAppProject.Common\WebAppProject.Common.csproj" />
     <ProjectReference Include="..\WebAppProject.Data\WebAppProject.Data.csproj" />
     <ProjectReference Include="..\WebAppProject.Infrastucture\WebAppProject.Infrastucture.csproj" />
+    <ProjectReference Include="..\WebAppProject.ViewModels\WebAppProject.ViewModels.csproj" />
   </ItemGroup>
 </Project>

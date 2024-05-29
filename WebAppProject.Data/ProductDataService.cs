@@ -19,14 +19,14 @@ namespace WebAppProject.Data
             return this.db.SaveData(sql, product);
         }
 
-        public Task<List<ProductModel>> GetProducts()
+        public async Task<List<ProductModel>> GetProducts()
         {
             string sql = "SELECT * FROM [Products]";
 
-            return this.db.LoadData<ProductModel, dynamic>(sql, new { });
+            return await this.db.LoadData<ProductModel, dynamic>(sql, new { });
         }
 
-        public Task InsertProduct(ProductModel product)
+        public  Task InsertProduct(ProductModel product)
         {
 
             string sql = @"INSERT INTO  [Products]([Id]
@@ -34,7 +34,7 @@ namespace WebAppProject.Data
                                        ,[DateAdded])
                                 VALUES (@Id,@Name,@Price,@DateAdded)";
 
-            return this.db.SaveData(sql, product);
+            return  this.db.SaveData(sql, product);
 
         }
 

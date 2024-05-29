@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using WebAppProject.Data;
+using WebAppProject.ViewModels.Product;
 
 namespace WebAppProject.Infrastucture.Extensions
 {
@@ -9,6 +10,7 @@ namespace WebAppProject.Infrastucture.Extensions
         public static IServiceCollection AddApplicationServises(this IServiceCollection services)
         {
             services.AddServices(typeof(ISqlDbAccessService));
+            services.AddScoped<IProductsViewModel,ProductsViewModel>();
 
             return services;
         }
@@ -34,6 +36,6 @@ namespace WebAppProject.Infrastucture.Extensions
                 }
                 services.AddScoped(interfaceType, implamentationType);
             }
-        }
+        }     
     }
 }
