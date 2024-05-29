@@ -1,0 +1,76 @@
+﻿@page "/ViewModel/Products"
+
+@using WebAppProject.ViewModels.Product
+
+@inject IProductsViewModel productsViewModel
+
+<h1>ViewModelPage</h1>
+
+<h4>CurrentProducts</h4>
+
+@if (productsViewModel.Products is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <DxGrid Data="productsViewModel.Products"
+            ShowSearchBox="true"
+            EditModelSaving="OnEditModelSaving"
+            DataItemDeleting="OnDataItemDeleting"
+            CustomizeEditModel="OnCustomizeEditModel"
+            KeyFieldName="Id"
+            ShowGroupPanel="true"
+            ShowFilterRow="true"> 
+        <Columns>
+            <DxGridCommandColumn />
+            <DxGridDataColumn FieldName="Name" />
+            <DxGridDataColumn FieldName="Price"
+                              DisplayFormat="c"
+                              Caption="Price"/> 
+            <DxGridDataColumn FieldName="DateAdded"
+                              DisplayFormat="D" />
+
+        </Columns>
+        <TotalSummary>
+            <DxGridSummaryItem FooterColumnName="Name"
+                               SummaryType="GridSummaryItemType.Count" />
+        </TotalSummary>
+       <EditFormTemplate Context="editFormContext"> 
+            <DxFormLayout>
+                <DxFormLayoutItem Caption="Name">
+                    @editFormContext.GetEditor("Name")
+               </DxFormLayoutItem>
+                <DxFormLayoutItem Caption="Price">
+                    @editFormContext.GetEditor("Price")
+               </DxFormLayoutItem>
+                <DxFormLayoutItem Caption="DateAdded">
+                    @editFormContext.GetEditor("DateAdded")
+               </DxFormLayoutItem>
+                <DxFormLayoutItem ColSpanMd="12">
+                    <ValidationSummary/>
+                </DxFormLayoutItem>
+            </DxFormLayout>
+       </EditFormTemplate>       
+    </DxGrid>
+}
+@code
+{
+    protected override void OnInitialized()
+    {
+    }
+    async void OnDataItemDeleting(GridDataItemDeletingEventArgs e)
+    {
+        productsViewModel.DeletingProduct(e);      
+    }
+
+    async void OnEditModelSaving(GridEditModelSavingEventArgs e)
+    {
+        productsViewModel.EditProduct(e);
+    }
+    void OnCustomizeEditModel(GridCustomizeEditModelEventArgs e)
+    {
+        productsViewModel.CustomizeEditModel(e);
+    }
+}
+
