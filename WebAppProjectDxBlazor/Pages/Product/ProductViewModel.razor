@@ -59,6 +59,7 @@ else
     protected override void OnInitialized()
     {
     }
+
     async void OnDataItemDeleting(GridDataItemDeletingEventArgs e)
     {
         productsViewModel.DeletingProduct(e);      
@@ -68,6 +69,7 @@ else
     {
         productsViewModel.EditProduct(e);
     }
+
     void OnCustomizeEditModel(GridCustomizeEditModelEventArgs e)
     {
         productsViewModel.CustomizeEditModel(e);

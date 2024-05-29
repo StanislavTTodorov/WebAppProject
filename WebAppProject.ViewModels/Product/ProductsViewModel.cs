@@ -1,15 +1,11 @@
 ﻿
-
-
 using DevExpress.Blazor;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using WebAppProject.Data;
 using WebAppProject.Data.Models;
 
 namespace WebAppProject.ViewModels.Product
 {
-    
+
     public class ProductsViewModel : IProductsViewModel
     {
         private readonly IProductDataService productDataService;
@@ -24,10 +20,7 @@ namespace WebAppProject.ViewModels.Product
             })
             .GetAwaiter()
             .GetResult();
-
         }
-
-
 
         private List<ProductModel> products = new List<ProductModel>();
 

@@ -1,6 +1,4 @@
 ﻿using DevExpress.Blazor;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using WebAppProject.Data.Models;
 
 namespace WebAppProject.ViewModels.Product

@@ -28,14 +28,12 @@ namespace WebAppProject.Data
 
         public  Task InsertProduct(ProductModel product)
         {
-
             string sql = @"INSERT INTO  [Products]([Id]
                                        ,[Name],[Price]
                                        ,[DateAdded])
                                 VALUES (@Id,@Name,@Price,@DateAdded)";
 
             return  this.db.SaveData(sql, product);
-
         }
 
         public Task UpdateProduct(ProductModel product)
